@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: auth-service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: false
+    open-in-view: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+  output:
+    ansi:
+      enabled: always
+
+springdoc:
+  api-docs:
+    path: /api/docs
+
+grpc:
+  server:
+    port: ${GRPC_PORT}
+    security:
+      enabled: true
+      certificateChain: file:certs/server.crt
+      privateKey: file:certs/server.key
+#      privateKeyPassword: ${PRIVATE_KEY_PASSWORD}
+      trustCertCollection: file:certs/trusted-clients.crt.collection
+      clientAuth: REQUIRE
+
+logging:
+  level:
+    root: INFO
+
+server:
+  port: ${HTTP_PORT}
+  servlet:
+    context-path: /auth
+
+jwt:
+  secret:
+    access: ${JWT_SECRET_ACCESS}
+    refresh: ${JWT_SECRET_REFRESH}

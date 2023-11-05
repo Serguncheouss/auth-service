@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+package dev.serguncheouss.authservice.grpc;
+
+option java_multiple_files = true;
+option java_package = "dev.serguncheouss.authservice.grpc";
+
+
+message CreateUserRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message GRPCUser {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+  string access_token = 5;
+  string refresh_token = 6;
+  string is_active = 7;
+  google.protobuf.Timestamp create_date = 8;
+  repeated string roles = 9;
+}
+
+message UserListResponse {
+  repeated GRPCUser users = 1;
+}
+
+message CheckTokenRequest {
+  string access_token = 1;
+}
+
+message CheckTokenResponse {
+  string id = 1;
+}
+
+service UserService {
+  rpc Create(CreateUserRequest) returns (GRPCUser);
+  rpc Get(GetUserRequest) returns (GRPCUser);
+  rpc GetAll(google.protobuf.Empty) returns (UserListResponse);
+  rpc Update(GRPCUser) returns (google.protobuf.Empty);
+  rpc CheckToken(CheckTokenRequest) returns (CheckTokenResponse);
+  rpc Delete(GetUserRequest) returns (google.protobuf.Empty);
+}
