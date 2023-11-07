@@ -26,6 +26,10 @@ public class UserService {
     private TokenService tokenService;
 
     public User create(String username, String password) {
+        return create(username, password, false);
+    }
+
+    public User create(String username, String password, boolean isActive) {
         String encodedPassword = passwordEncoder().encode(password);
 
         final User user = new User(username, encodedPassword);
@@ -36,7 +40,7 @@ public class UserService {
         );
         user.setAccessToken(tokens[0]);
         user.setRefreshToken(tokens[1]);
-        user.setIsActive(false);
+        user.setIsActive(isActive);
 
         return userRepository.save(user);
     }

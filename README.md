@@ -27,7 +27,7 @@ External API is open and can be used without authentication.
    openssl req -new -x509 -nodes -days 365000 -key ca.key -out ca.crt
    
    #Server
-   openssl req -newkey rsa:2048 -nodes -keyout server.key -out server-req.pem
+   openssl req -newkey rsa:2048 -subj "//CN=localhost" -nodes -keyout server.key -out server-req.pem
    openssl x509 -req -days 365000 -in server-req.pem -out server.crt -CA ca.crt -CAkey ca.key
    
    #Client
@@ -42,18 +42,26 @@ External API is open and can be used without authentication.
 4. If you need, do some changes in configuration file `application.yaml`.
 5. Generate secret tokens (`JWT_SECRET_ACCESS`, `JWT_SECRET_REFRESH`). You can use `utils.SecretsGenerator.main()` method for this.
 
+## Build
+1. Previously build and install the [grpc interface lib](https://github.com/Serguncheouss/auth-service-grpc-interface)
+2. Build the project:
+   ```
+   mvn clean
+   mvn package
+   ```
+
 ## Run
 ### Direct run
 1. You can set environment variables `GRPC_PORT`, `HTTP_PORT`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `JWT_SECRET_ACCESS`, `JWT_SECRET_REFRESH` and run:
    ```
-   java -jar .\target\auth-service-1.0.jar
+   java -jar .\target\auth-service-1.0.1.jar
    ```
    or pass it to command and run:
    ```
    java -DGRPC_PORT=8090 -DHTTP_PORT=8080 \
    -DDB_PORT=3306 -DDB_NAME=db_name -DDB_USER=db_user -DDB_PASSWORD=db_password \
    -DJWT_SECRET_ACCESS=secret_access -DJWT_SECRET_REFRESH=secret_refresh \
-   -jar .\target\auth-service-1.0.0.jar
+   -jar .\target\auth-service-1.0.1.jar
    ```
 ### Docker
 1. You can create a `.env` file and run by docker-compose:

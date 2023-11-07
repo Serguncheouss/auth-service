@@ -33,9 +33,11 @@ public class User {
     private String password;
     @Getter
     @Setter
+    @Column(length = 1000)
     private String accessToken;
     @Getter
     @Setter
+    @Column(length = 500)
     private String refreshToken;
     @Getter
     @Setter
