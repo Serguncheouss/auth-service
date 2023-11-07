@@ -54,14 +54,14 @@ External API is open and can be used without authentication.
 ### Direct run
 1. You can set environment variables `GRPC_PORT`, `HTTP_PORT`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `JWT_SECRET_ACCESS`, `JWT_SECRET_REFRESH` and run:
    ```
-   java -jar .\target\auth-service-1.0.jar
+   java -jar .\target\auth-service-1.0.1.jar
    ```
    or pass it to command and run:
    ```
    java -DGRPC_PORT=8090 -DHTTP_PORT=8080 \
    -DDB_PORT=3306 -DDB_NAME=db_name -DDB_USER=db_user -DDB_PASSWORD=db_password \
    -DJWT_SECRET_ACCESS=secret_access -DJWT_SECRET_REFRESH=secret_refresh \
-   -jar .\target\auth-service-1.0.0.jar
+   -jar .\target\auth-service-1.0.1.jar
    ```
 ### Docker
 1. You can create a `.env` file and run by docker-compose:
