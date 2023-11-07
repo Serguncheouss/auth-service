@@ -31,7 +31,7 @@ public class UserServiceGrpcImpl extends UserServiceGrpc.UserServiceImplBase {
     public void create(
             CreateUserRequest request, StreamObserver<GRPCUser> responseObserver) {
         try {
-            final User user = userService.create(request.getUsername(), request.getPassword());
+            final User user = userService.create(request.getUsername(), request.getPassword(), request.getIsActive());
 
             GRPCUser response = GRPCUserFromUser(user);
 
