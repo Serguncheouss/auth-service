@@ -27,7 +27,7 @@ External API is open and can be used without authentication.
    openssl req -new -x509 -nodes -days 365000 -key ca.key -out ca.crt
    
    #Server
-   openssl req -newkey rsa:2048 -nodes -keyout server.key -out server-req.pem
+   openssl req -newkey rsa:2048 -subj "//CN=localhost" -nodes -keyout server.key -out server-req.pem
    openssl x509 -req -days 365000 -in server-req.pem -out server.crt -CA ca.crt -CAkey ca.key
    
    #Client
@@ -41,6 +41,14 @@ External API is open and can be used without authentication.
    ```
 4. If you need, do some changes in configuration file `application.yaml`.
 5. Generate secret tokens (`JWT_SECRET_ACCESS`, `JWT_SECRET_REFRESH`). You can use `utils.SecretsGenerator.main()` method for this.
+
+## Build
+1. Previously build and install the [grpc interface lib](https://github.com/Serguncheouss/auth-service-grpc-interface)
+2. Build the project:
+   ```
+   mvn clean
+   mvn package
+   ```
 
 ## Run
 ### Direct run

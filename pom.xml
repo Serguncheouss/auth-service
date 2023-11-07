@@ -127,6 +127,12 @@
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <groupId>dev.serguncheouss</groupId>
+            <artifactId>auth-service-grpc-interface</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
